@@ -17,6 +17,7 @@ class ChirpController extends Controller
     {
         return Inertia::render('Chirps/Index', [
             // pass data
+            'chirps' => Chirp::with('user:id,name')->latest()->get()
         ]);
     }
 
@@ -39,7 +40,7 @@ class ChirpController extends Controller
 
         $request->user()->chirps()->create($validated);
 
-        return redirect(route('chirps.index'))
+        return redirect(route('chirps.index'));
     }
 
     /**
